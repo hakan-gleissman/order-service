@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import se.sprinto.hakan.orderservice.dto.CreateOrderRequest;
+import se.sprinto.hakan.orderservice.dto.OrderResponse;
 import se.sprinto.hakan.orderservice.model.CustomerOrder;
 import se.sprinto.hakan.orderservice.service.OrderService;
 
@@ -39,7 +40,7 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CustomerOrder>> findAll() {
+    public ResponseEntity<List<OrderResponse>> findAll() {
         return ResponseEntity.ok(orderService.findAll());
     }
 }

@@ -6,6 +6,8 @@ import se.sprinto.hakan.orderservice.client.ProductClient;
 import se.sprinto.hakan.orderservice.client.ProductInfo;
 import se.sprinto.hakan.orderservice.client.ProductStockItemRequest;
 import se.sprinto.hakan.orderservice.dto.CreateOrderRequest;
+import se.sprinto.hakan.orderservice.dto.OrderItemResponse;
+import se.sprinto.hakan.orderservice.dto.OrderResponse;
 import se.sprinto.hakan.orderservice.messaging.OrderConfirmationMessage;
 import se.sprinto.hakan.orderservice.messaging.OrderConfirmationProduct;
 import se.sprinto.hakan.orderservice.messaging.OrderConfirmationPublisher;
@@ -62,8 +64,12 @@ public class OrderService {
         return savedOrder;
     }
 
-    public List<CustomerOrder> findAll() {
-        return customerOrderRepository.findAll();
+    @Transactional(readOnly = true)
+    public List<OrderResponse> findAll() {
+        return customerOrderRepository.findAll()
+                .stream()
+                .map(this::toResponse)
+                .toList();
     }
 
     private OrderConfirmationMessage toMessage(CustomerOrder order) {
@@ -73,5 +79,20 @@ public class OrderService {
                 .toList();
 
         return new OrderConfirmationMessage(order.getId(), order.getCustomerName(), order.getTotalPrice(), products);
+    }
+
+    private OrderResponse toResponse(CustomerOrder order) {
+        List<OrderItemResponse> items = order.getOrderItems()
+                .stream()
+                .map(item -> new OrderItemResponse(item.getId(), item.getName(), item.getPrice(), item.getQuantity()))
+                .toList();
+
+        return new OrderResponse(
+                order.getId(),
+                order.getOrderDate(),
+                order.getCustomerName(),
+                order.getTotalPrice(),
+                items
+        );
     }
 }
