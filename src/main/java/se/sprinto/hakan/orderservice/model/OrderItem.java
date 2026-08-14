@@ -25,7 +25,7 @@ public class OrderItem {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    private CustomerOrder order;
+    private Order order;
 
     public OrderItem() {
     }
@@ -56,7 +56,7 @@ public class OrderItem {
         return quantity;
     }
 
-    public CustomerOrder getOrder() {
+    public Order getOrder() {
         return order;
     }
 
@@ -76,7 +76,7 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public void setOrder(CustomerOrder order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 }

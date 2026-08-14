@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import se.sprinto.hakan.orderservice.dto.CreateOrderRequest;
+import se.sprinto.hakan.orderservice.dto.OrderRequest;
 import se.sprinto.hakan.orderservice.dto.OrderResponse;
-import se.sprinto.hakan.orderservice.model.CustomerOrder;
+import se.sprinto.hakan.orderservice.model.Order;
 import se.sprinto.hakan.orderservice.service.OrderService;
 
 import java.util.List;
@@ -28,8 +28,8 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerOrder> createOrder(
-            @Valid @RequestBody CreateOrderRequest request,
+    public ResponseEntity<Order> createOrder(
+            @Valid @RequestBody OrderRequest request,
             @AuthenticationPrincipal Jwt jwt
     ) {
         String bearerToken = "Bearer " + jwt.getTokenValue();

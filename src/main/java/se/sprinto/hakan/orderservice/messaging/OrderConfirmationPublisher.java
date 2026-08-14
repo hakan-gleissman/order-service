@@ -3,6 +3,7 @@ package se.sprinto.hakan.orderservice.messaging;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import se.sprinto.hakan.orderservice.model.Order;
 
 @Component
 public class OrderConfirmationPublisher {
@@ -15,7 +16,7 @@ public class OrderConfirmationPublisher {
         this.emailQueue = emailQueue;
     }
 
-    public void publish(OrderConfirmationMessage message) {
-        rabbitTemplate.convertAndSend(emailQueue, message);
+    public void publish(Order order) {
+        rabbitTemplate.convertAndSend(emailQueue, order);
     }
 }

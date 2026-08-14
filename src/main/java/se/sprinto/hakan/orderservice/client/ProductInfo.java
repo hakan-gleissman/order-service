@@ -6,9 +6,8 @@ public class ProductInfo {
 
     private Long id;
     private String name;
-    private String description;
     private BigDecimal price;
-    private int stock;
+    private int quantity;
 
     public Long getId() {
         return id;
@@ -18,16 +17,12 @@ public class ProductInfo {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
 
-    public int getStock() {
-        return stock;
+    public int getQuantity() {
+        return quantity;
     }
 
     public void setId(Long id) {
@@ -38,15 +33,11 @@ public class ProductInfo {
         this.name = name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setQuantity(int stock) {
+        this.quantity = stock;
     }
 }
